@@ -3,7 +3,7 @@ import pygame.freetype
 from pygame.sprite import Sprite
 from pygame.rect import Rect
 from enum import Enum
-from pygame.sprite import RenderUpdates
+import pygame.sprite
 
 BLUE = (106, 159, 181)
 WHITE = (255, 255, 255)
@@ -142,7 +142,7 @@ def title_screen(screen):
         text="by : Am_bre, Rachel, Xériyon, Niven, Manël and Real",
     )
 
-    buttons = RenderUpdates(start_btn, quit_btn, text_btn, goats_btn)
+    buttons = pygame.sprite.RenderUpdates(start_btn, quit_btn, text_btn, goats_btn)
 
 
     return game_loop(screen, buttons)
@@ -167,7 +167,7 @@ def play_level(screen, player):
         action=GameState.NEXT_LEVEL,
     )
 
-    buttons = RenderUpdates(return_btn, nextlevel_btn)
+    buttons = pygame.sprite.RenderUpdates(return_btn, nextlevel_btn)
 
     return game_loop(screen, buttons)
 
@@ -201,6 +201,16 @@ class GameState(Enum):
     NEWGAME = 1
     NEXT_LEVEL = 2
 
+import pygame
+import os 
+
+pygame.init()
+pygame.mixer.init()
+
+chemin = os.path.join(os.path.dirname(__file__), "Rachel-dont-wait-anymore.wav")
+pygame.mixer.music.load(chemin)
+pygame.mixer.music.play(5)
 
 if __name__ == "__main__":
     main()
+    
