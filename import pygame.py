@@ -126,7 +126,24 @@ def title_screen(screen):
         action=GameState.QUIT,
     )
 
-    buttons = RenderUpdates(start_btn, quit_btn)
+    text_btn = UIElement(
+        center_position=(400, 200),
+        font_size=70,
+        bg_rgb=BLUE,
+        text_rgb=WHITE,
+        text="Dazo's Tale",
+    )
+    
+    goats_btn = UIElement(
+        center_position=(400, 250),
+        font_size=14,
+        bg_rgb=BLUE,
+        text_rgb=WHITE,
+        text="by : Am_bre, Rachel, Xériyon, Niven, Manël and Real",
+    )
+
+    buttons = RenderUpdates(start_btn, quit_btn, text_btn, goats_btn)
+
 
     return game_loop(screen, buttons)
 
@@ -146,7 +163,7 @@ def play_level(screen, player):
         font_size=30,
         bg_rgb=BLUE,
         text_rgb=WHITE,
-        text=f"Jouer",
+        text=f"Jouer !",
         action=GameState.NEXT_LEVEL,
     )
 
@@ -179,7 +196,8 @@ def game_loop(screen, buttons):
 
 class GameState(Enum):
     QUIT = -1
-    TITLE = 0
+    TITLE =  0
+    TITLE2 =  0
     NEWGAME = 1
     NEXT_LEVEL = 2
 
