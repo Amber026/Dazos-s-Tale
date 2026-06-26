@@ -216,6 +216,8 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 bg_image=pygame.image.load('free-swamp-game-tileset-pixel-art/2 Background/Background.png')
 bg_image=pygame.transform.scale(bg_image, (1200,750))
+gamewin=pygame.image.load("gamewin.png")
+gamewin=pygame.transform.scale(gamewin, (1200,750))
 
 # the Target Sprite
 class Target(pygame.sprite.Sprite):
@@ -338,15 +340,7 @@ while running:
     on_target= P1.rect.colliderect(T)
 
     if on_target:
-        all_platforms.empty()
-        all_platforms.add(platform_1b)
-        all_platforms.add(platform_2b)
-        all_platforms.add(platform_3b)
-        all_platforms.add(platform_4b)
-        all_platforms.add(platform_5b)
-        all_platforms.add(platform_6b)
-        for platform in all_platforms.sprites():
-            print("platform added")
+        displaysurface.blit(gamewin, (0, 0))
     else:
         displaysurface.blit(bg_image, (0, 0))
 
