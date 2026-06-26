@@ -240,31 +240,37 @@ class Player(pygame.sprite.Sprite):
         self.surf=self.idle
         self.rect = self.surf.get_rect()
         self.rect.midbottom = (200, 225)
-# the Platform Sprite
-"""class Platform(pygame.sprite.Sprite):
+# the Platform Sprite au cas ou je savais pas
+class PlatformB(pygame.sprite.Sprite):
     def __init__(self, width, position, colour = (0,200,0)):
         super().__init__()
         self.surf = pygame.Surface((width, 20))
         self.surf.fill(colour)
-        self.rect = self.surf.get_rect(center = position)"""
+        self.rect = self.surf.get_rect(center = position)
 
 class Platform(pygame.sprite.Sprite):
     #def __init__(self, width = 0, height = 18):
     def __init__(self, width, position):
         super().__init__()
- 
-        if width == 0: width = random.randint(50, 120)
- 
+
+    
         self.image = pygame.image.load("free-swamp-game-tileset-pixel-art/1 Tiles/Tile_02.png")
         self.surf = pygame.transform.scale(self.image, (100, 50))
         self.rect = self.surf.get_rect(center = position)
 
-platform_1 = Platform(100, (200, 500))
-platform_2 = Platform(50, (400, 600))
-platform_3 = Platform(120, (600, 600))
-platform_4 = Platform(190, (800, 550))
-platform_5 = Platform(160, (1000, 500))
-platform_6 = Platform(WIDTH, (WIDTH/2, HEIGHT))
+platform_1 = Platform(10, (200, 700))
+platform_2 = Platform(10, (400, 700))
+platform_3 = Platform(10, (600, 700))
+platform_4 = Platform(10, (800, 650))
+platform_5 = Platform(10, (1000, 600))
+platform_6 = PlatformB(WIDTH, (WIDTH/2, HEIGHT))
+
+platform_1b = Platform(100, (100, 500))
+platform_2b = Platform(50, (200, 600))
+platform_3b = Platform(120, (100, 600))
+platform_4b = Platform(190, (300, 550))
+platform_5b = Platform(160, (800, 500))
+platform_6b = Platform(WIDTH, (WIDTH/2, HEIGHT))
 
 
 
@@ -289,7 +295,7 @@ def has_bumped(player:Player, platform:Platform)->bool:
 # visible elements
 all_sprites = pygame.sprite.Group()
 
-T = Target((1000, 450))
+T = Target((1000, 550))
 all_sprites.add(T)
 
 P1 = Player()
@@ -329,13 +335,18 @@ while running:
         elif event.type == timer_event:
             print("test")
             running = False
+    on_target= P1.rect.colliderect(T)
 
     if on_target:
-        background_colour = (
-            random.randint(0, 255),
-            random.randint(0, 255),
-            random.randint(0, 255)
-        )
+        all_platforms.empty()
+        all_platforms.add(platform_1b)
+        all_platforms.add(platform_2b)
+        all_platforms.add(platform_3b)
+        all_platforms.add(platform_4b)
+        all_platforms.add(platform_5b)
+        all_platforms.add(platform_6b)
+        for platform in all_platforms.sprites():
+            print("platform added")
     else:
         displaysurface.blit(bg_image, (0, 0))
 
