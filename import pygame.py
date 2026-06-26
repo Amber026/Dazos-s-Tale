@@ -209,7 +209,7 @@ pygame.mixer.init()
 
 chemin = os.path.join(os.path.dirname(__file__), "Rachel-dont-wait-anymore.wav")
 pygame.mixer.music.load(chemin)
-pygame.mixer.music.play(5)
+pygame.mixer.music.play(4)
 
 if __name__ == "__main__":
     main()
