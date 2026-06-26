@@ -131,7 +131,7 @@ def title_screen(screen):
         font_size=70,
         bg_rgb=BLUE,
         text_rgb=WHITE,
-        text="Dazo's Tale",
+        text="Dazos's Tale",
     )
     
     goats_btn = UIElement(
@@ -214,7 +214,7 @@ police=pygame.font.SysFont("cabin", 30, bold=False,)
 debut=pygame.time.get_ticks()
 FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
-bg_image=pygame.image.load('Reference (2).png')
+bg_image=pygame.image.load('free-swamp-game-tileset-pixel-art/2 Background/Background.png')
 bg_image=pygame.transform.scale(bg_image, (1200,750))
 
 # the Target Sprite
@@ -241,11 +241,22 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect()
         self.rect.midbottom = (200, 225)
 # the Platform Sprite
-class Platform(pygame.sprite.Sprite):
+"""class Platform(pygame.sprite.Sprite):
     def __init__(self, width, position, colour = (0,200,0)):
         super().__init__()
         self.surf = pygame.Surface((width, 20))
         self.surf.fill(colour)
+        self.rect = self.surf.get_rect(center = position)"""
+
+class Platform(pygame.sprite.Sprite):
+    #def __init__(self, width = 0, height = 18):
+    def __init__(self, width, position):
+        super().__init__()
+ 
+        if width == 0: width = random.randint(50, 120)
+ 
+        self.image = pygame.image.load("free-swamp-game-tileset-pixel-art/1 Tiles/Tile_02.png")
+        self.surf = pygame.transform.scale(self.image, (100, 50))
         self.rect = self.surf.get_rect(center = position)
 
 platform_1 = Platform(100, (200, 500))
@@ -253,7 +264,9 @@ platform_2 = Platform(50, (400, 600))
 platform_3 = Platform(120, (600, 600))
 platform_4 = Platform(190, (800, 550))
 platform_5 = Platform(160, (1000, 500))
-platform_6 = Platform(WIDTH, (WIDTH/2, HEIGHT), (0, 0, 255))
+platform_6 = Platform(WIDTH, (WIDTH/2, HEIGHT))
+
+
 
 # has it landed?
 def has_landed(player:Player, platform:Platform)->bool:
